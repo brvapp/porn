@@ -1,0 +1,68 @@
+<!-- views/questionnaire.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questionário</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/contact">Contato</a></li>
+      <li><a href="/questionnaire">Questionário</a></li>
+    </ul>
+  </nav>
+
+  <h1 id="question-title">Questionário</h1>
+
+  <form action="/submit" method="post" id="question-form">
+    <div class="question-container" id="question-container">
+      <% questions.forEach((q, index) => { %>
+        <fieldset class="question" id="question<%= index %>" style="display: <%= index === 0 ? 'block' : 'none' %>;">
+          <legend><%= q.question %></legend>
+          <% q.options.forEach((option, optIndex) => { %>
+            <label>
+              <input type="radio" name="question<%= index %>" value="<%= optIndex %>" required>
+              <%= option %>
+            </label>
+          <% }) %>
+        </fieldset>
+      <% }) %>
+    </div>
+    <button type="button" id="next-button" onclick="nextQuestion()">Próxima Pergunta</button>
+    <button type="submit" id="submit-button" style="display: none;">Enviar Respostas</button>
+  </form>
+
+  <script>
+  let currentQuestion = 0;
+
+function nextQuestion() {
+  const currentFieldset = document.getElementById(`question${currentQuestion}`);
+  const selectedOption = document.querySelector(`input[name="question${currentQuestion}"]:checked`);
+
+  if (selectedOption) {
+    currentFieldset.style.display = 'none';
+
+    currentQuestion++;
+
+    const nextFieldset = document.getElementById(`question${currentQuestion}`);
+    if (nextFieldset) {
+      nextFieldset.style.display = 'block';
+    } else {
+      // Se não houver mais perguntas, mostra o botão de enviar respostas
+      document.getElementById('submit-button').style.display = 'inline-block';
+      document.getElementById('next-button').style.display = 'none';
+      document.getElementById('question-title').innerText = 'Questionário Concluído';
+    }
+  } else {
+    // Se a pergunta não foi respondida, exibe uma mensagem ou toma a ação desejada
+    alert('Por favor, responda a pergunta antes de avançar.');
+  }
+}
+</script>
+</body>
+</html>

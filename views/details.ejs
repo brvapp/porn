@@ -1,0 +1,32 @@
+<!-- views/details.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Image Details</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/contact">Contato</a></li>
+    </ul>
+  </nav>
+
+  <h1><%= imageDetails.name %></h1>
+  
+  <div class="details-container">
+
+    <p><%= imageDetails.description %></p>
+    <!-- Adicione mais detalhes conforme necessário -->
+  </div>
+</body>
+<section>
+  <footer>
+    <p>&copy; 2024 Ana Laura Seresuela. Todos os direitos reservados.</p>
+</footer>
+</section>
+</html>
