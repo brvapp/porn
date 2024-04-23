@@ -6,7 +6,7 @@ const fsExtra = require('fs-extra');
 const multer = require('multer');
 const faqData = require('./faqData'); // Importa o arquivo faqData
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
